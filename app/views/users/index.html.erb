@@ -1,7 +1,17 @@
-<h1>ユーザーindex</h1>
+
 <div class="container">
+    <div id="error_explanation">
+      <% if @user.errors.any? %>
+      <h3><%= @user.errors.count %>errors prohibited this obj from being saved:</h3>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>  
   <div class="row">
-    <div class="col-mp-3">
+    <div class="col-md-3">
       <h2>User info</h2>
       <%= image_tag @user.get_profile_image(100, 100) %>
       <table class="table">
@@ -12,12 +22,13 @@
           </tr>
           <tr>
             <th>introduction</th>
+            <th><%= @user.introduction %></th>
             <th>   </th>
           </tr>
         </tbody>
       </table>  
       
-      <h2>ユーザーinfo編集画面へ</h2>
+      <%= link_to "編集", edit_user_path(@user.id) %>
         
 
       <h2>New book</h2>

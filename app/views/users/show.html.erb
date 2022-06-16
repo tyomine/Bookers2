@@ -1,4 +1,4 @@
-ユーザーのshow
+
 <div class="container">
   <div class="row">
     <div class="col-md-3">
@@ -12,12 +12,13 @@
           </tr>
           <tr>
             <th>introduction</th>
+            <th><%= @user.introduction %></th>
             <th>   </th>
           </tr>
         </tbody>
       </table>  
       
-      <h2>ユーザーinfo編集画面へ</h2>
+      <%= link_to "編集",edit_user_path(@user.id) %>
         
 
       <h2>New book</h2>

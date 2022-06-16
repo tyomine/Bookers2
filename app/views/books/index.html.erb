@@ -1,4 +1,15 @@
 <div class="container">
+
+    <div id="error_explanation">
+      <% if @book.errors.any? %>
+      <h3><%= @book.errors.count %>errors prohibited this obj from being saved:</h3>
+        <ul>
+          <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>  
   <div class="row">
     <div class="col-md-3">
       <h2>User info</h2>
@@ -11,12 +22,14 @@
           </tr>
           <tr>
             <th>introduction</th>
+            <th><%= @user.introduction %></th>
             <th>   </th>
           </tr>
         </tbody>
       </table>  
-      
-      <h2>ユーザーinfo編集画面へ</h2>
+      <% if @user.id == current_user.id %>
+      <%= link_to "編集",edit_user_path(@user.id) %>
+      <% end %>
         
 
       <h2>New book</h2>
@@ -26,7 +39,7 @@
         <h4>Opinion</h4>
         <%= f.text_area :body %>
   
-        <p><%= f.submit "Create Book" %></p>
+        <%= f.submit "Create Book" %>
       <% end %>
     </div>
     
@@ -35,7 +48,7 @@
         <h2>Books</h2>
         <thead>
           <tr>
-            <th class="header1"></th>   </th>
+            <th class="header1"></th></th>
             <th class="header2">Title</th>
             <th class="header3">Opinion</th>
           </tr>
