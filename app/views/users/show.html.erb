@@ -1,39 +1,13 @@
 
 <div class="container">
+  
   <div class="row">
     <div class="col-md-3">
-      <h2>User info</h2>
-        <%= image_tag @user.get_profile_image(100, 100) %>
-      <table class="table">
-        <tbody>
-          <tr>
-            <th>name</th>
-            <th><%= @user.name %></th>
-          </tr>
-          <tr>
-            <th>introduction</th>
-            <th><%= @user.introduction %></th>
-            <th>   </th>
-          </tr>
-        </tbody>
-      </table>  
-      
-      <%= link_to "編集",edit_user_path(@user.id) %>
-        
-
-      <h2>New book</h2>
-      <%= form_with model: Book.new do |f| %>
-        <h4>Title</h4>
-        <%= f.text_field :title %>
-        <h4>Opinion</h4>
-        <%= f.text_area :body %>
-        
-  
-        <p><%= f.submit "Create Book" %></p>
-      <% end %>
-    </div>
+      <%= render "info", user: @user %>
+      <%= render "books/list" %>
+    </div>  
     
-    <div class="col-md-8">
+    <div class="col-md-8 offset-md-1">
       <table class="table">
         <h2>Books</h2>
         <thead>
@@ -46,7 +20,7 @@
         <tbody>
           <% @books.each do |book| %>
           <tr>
-            <td><%= image_tag @user.get_profile_image(100, 100) %></td>
+            <td><%= link_to user_path(book.user_id) do %><%= image_tag @user.get_profile_image(100, 100) %><% end %></td>
             <td><%= link_to book.title, book_path(book) %></td>
             <td><%= book.body %></td>
           </tr>
